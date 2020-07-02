@@ -1,0 +1,9 @@
+/**
+ * For consitent sizing, default box-sizinf to border box on all elements
+**/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

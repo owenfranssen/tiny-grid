@@ -1,0 +1,61 @@
+/**
+ * Column Classes
+**/
+
+/**
+ * .col default to full width mobile-first
+ * .no-gutter removes gutter
+**/
+.col,
+.col-100,
+[class*=col] {
+    @include make-col-percent(10);
+
+    &:not(.no-gutter) {
+        margin: calc(#{$gutter-width} / 2);
+    }
+}
+
+[class*=col] {
+    flex-shrink: 0;
+}
+
+@for $index from 1 through $columns {
+	.col-#{$index} {
+        @include make-col($index);
+	}
+}
+
+@for $index from 2 through 10 {
+    $label: $index * 10;
+    .col-#{$label} {
+        @include make-col-percent($index);
+    }
+}
+
+//@media only screen and (min-width: #{$medium}) {
+@include respond-to('medium-up') {
+    .col,
+    [class*=col-lg] {
+        flex-basis: auto;
+        flex-grow: 1;
+        width: auto;
+    }
+}
+
+@each $breakpoint, $width in $breakpoints {
+    @media only screen and (min-width: #{$width}) {
+        @for $index from 1 through $columns {
+            .col-#{$breakpoint}-#{$index} {
+                @include make-col($index);
+            }
+        }
+
+        @for $index from 2 through 10 {
+            $label: $index * 10;
+            .col-#{$breakpoint}-#{$label} {
+                @include make-col-percent($index);
+            }
+        }
+    }
+}

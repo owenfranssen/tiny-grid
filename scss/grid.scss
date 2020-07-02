@@ -1,0 +1,31 @@
+@import 'settings/config';
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+    padding-bottom: calc(#{$gutter-width} / 2);
+    padding-top: calc(#{$gutter-width} / 2);
+
+    &:not(.full-width) {
+        padding-left: calc(#{$gutter-width} / 2);
+        padding-right: calc(#{$gutter-width} / 2);
+    }
+
+    /**
+    * .no-gutter removes gutter from container and immediate child columns, but not nested columns
+    **/
+    &.no-gutter,
+    &.no-gutter > [class*=col] {
+        padding: 0;
+    }
+}

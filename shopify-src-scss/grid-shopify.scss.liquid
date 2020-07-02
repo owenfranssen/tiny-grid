@@ -1,0 +1,224 @@
+/**
+ * Grid breakpoints
+**/
+$mobile: 576px !default;
+$tablet: 768px !default;
+$laptop: 992px !default;
+$desktop: 1200px !default;
+$widescreen: 1400px !default;
+
+$small: $mobile !default;
+$medium: $tablet !default;
+$large: $laptop !default;
+$extralarge: $desktop !default;
+
+$breakpoints: (
+//  ('xs', 0),
+//  ('sm', $small),
+  ('md', $medium),
+  ('lg', $large)
+//  ('xl': $extralarge),
+//  ('xxl': $widescreen)
+) !default;
+
+$media-breakpoints: (
+    ('small', $small),
+    ('medium', $medium),
+    ('large', $large),
+    ('extralarge', $extralarge)
+) !default;
+
+/**
+ * Number of columns in grid
+**/
+$columns: 12 !default;
+
+/**
+ * Gutter width
+**/
+$gutter-width: 1rem !default;
+
+/**
+ * For consistent sizing, default box-sizing to border-box on all elements
+**/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/**
+ * Mixin to generate media queries based on $breakpoints
+**/
+@mixin respond-to($media-query) {
+    $breakpoint-found: false;
+
+    @each $breakpoint in $media-breakpoints {
+        $label: nth($breakpoint, 1);
+        $size: nth($breakpoint, 2);
+        @if $media-query == '#{$label}-down' {
+            @media only screen and (max-width: calc(#{$size} - 1px)) {
+                @content;
+            }
+        } @else if $media-query == '#{$label}-up'  {
+            @media only screen and (min-width: #{$size}) {
+                @content;
+            }
+        }
+    }
+}
+
+/**
+ * Mixins to generate grid classes
+**/
+
+/**
+ * col-1, .col-2, .col-3 ... .col-11, .col-12 where in .col-X X is X/12
+**/
+@mixin make-col($index) {
+    $width: percentage(($index / $columns));
+    $width-after-gutter: calc(#{$width} - #{$gutter-width});
+    flex-basis: $width-after-gutter;
+    max-width: $width-after-gutter;
+    width: $width-after-gutter;
+}
+
+/**
+ * col-10, .col-20, ... .col-90, .col-100 where in col-X X is % of width
+**/
+@mixin make-col-percent($index) {
+    $width: percentage(($index / 10));
+    $width-after-gutter: calc(#{$width} - #{$gutter-width});
+    flex-basis: $width-after-gutter;
+    max-width: $width-after-gutter;
+    width: $width-after-gutter;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+    padding-bottom: calc(#{$gutter-width} / 2);
+    padding-top: calc(#{$gutter-width} / 2);
+
+    /**
+     * .full-width removes X-padding making full-width container
+    **/
+    &:not(.full-width) {
+        padding-left: calc(#{$gutter-width} / 2);
+        padding-right: calc(#{$gutter-width} / 2);
+    }
+
+    /**
+    * .no-gutter removes gutter from container and immediate child columns, but not nested columns
+    **/
+    &.no-gutter,
+    &.no-gutter > [class*=col] {
+        padding: 0;
+    }
+}
+
+/**
+ * Column Classes
+**/
+
+/**
+ * .col default to full width mobile-first
+ * .no-gutter removes gutter
+**/
+.col,
+.col-100,
+[class*=col] {
+    @include make-col-percent(10);
+
+    &:not(.no-gutter) {
+        margin: calc(#{$gutter-width} / 2);
+    }
+}
+
+[class*=col] {
+    flex-shrink: 0;
+}
+
+@for $index from 1 through $columns {
+	.col-#{$index} {
+        @include make-col($index);
+	}
+}
+
+@for $index from 2 through 10 {
+    $label: $index * 10;
+    .col-#{$label} {
+        @include make-col-percent($index);
+    }
+}
+
+//@media only screen and (min-width: #{$medium}) {
+@include respond-to('medium-up') {
+    .col,
+    [class*=col-lg] {
+        flex-basis: auto;
+        flex-grow: 1;
+        width: auto;
+    }
+}
+
+@each $breakpoint in $breakpoints {
+    $label: nth($breakpoint, 1);
+    $width: nth($breakpoint, 2);
+    @media only screen and (min-width: #{$width}) {
+        @for $index from 1 through $columns {
+            .col-#{$label}-#{$index} {
+                @include make-col($index);
+            }
+        }
+
+        @for $index from 2 through 10 {
+            $label: $index * 10;
+            .col-#{$label}-#{$label} {
+                @include make-col-percent($index);
+            }
+        }
+    }
+}
+
+/**
+ * Classes to hide or show elements based on breakpoints
+**/
+
+.hide-sm,
+[class*=show--] {
+    display: none !important;
+}
+
+@each $breakpoint in $breakpoints {
+    $label: nth($breakpoint, 1);
+    $width: nth($breakpoint, 2);
+    @media only screen and (min-width: #{$width}) {
+        .hide--#{$label} {
+            display: none !important;
+        }
+
+        .show--#{$label} {
+            display: block !important;
+        }
+
+        .show--#{$label}-inline {
+            display: inline !important;
+        }
+
+        .show--#{$label}-inline-block {
+            display: inline-block !important;
+        }
+    }
+}

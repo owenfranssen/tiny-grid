@@ -1,0 +1,24 @@
+.hide-sm,
+[class*=show--] {
+    display: none !important;
+}
+
+@each $breakpoint, $width in $breakpoints {
+    @media only screen and (min-width: #{$width}) {
+        .hide--#{$breakpoint} {
+            display: none !important;
+        }
+
+        .show--#{$breakpoint} {
+            display: block !important;
+        }
+
+        .show--#{$breakpoint}-inline {
+            display: inline !important;
+        }
+
+        .show--#{$breakpoint}-inline-block {
+            display: inline-block !important;
+        }
+    }
+}

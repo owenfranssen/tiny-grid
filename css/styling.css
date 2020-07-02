@@ -1,0 +1,18 @@
+body {
+  font-size: 16px; }
+
+.container {
+  min-height: 3em; }
+  .container > [class^=col] {
+    border: 1px dotted silver;
+    min-height: 5em;
+    min-width: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+
+header {
+  background-color: gainsboro; }
+
+footer {
+  background-color: #111; }

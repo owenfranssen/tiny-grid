@@ -1,0 +1,18 @@
+/**
+ * Mixins to generate media queries based on $breakpoints
+**/
+@mixin respond-to($media-query) {
+    $breakpoint-found: false;
+
+    @each $breakpoint, $size in $media-breakpoints {
+        @if $media-query == '#{$breakpoint}-down' {
+            @media only screen and (max-width: calc(#{$size} - 1px)) {
+                @content;
+            }
+        } @else if $media-query == '#{$breakpoint}-up'  {
+            @media only screen and (min-width: #{$size}) {
+                @content;
+            }
+        }
+    }
+}
