@@ -1,6 +1,6 @@
-/**
- * Mixins to generate media queries based on $breakpoints
-**/
+//**
+// * Mixins to generate media queries based on $breakpoints
+//**
 @mixin respond-to($media-query) {
     $breakpoint-found: false;
 

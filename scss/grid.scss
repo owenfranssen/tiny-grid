@@ -17,14 +17,17 @@ html, body {
     padding-top: calc(#{$gutter-width} / 2);
     width: 100%;
 
+    //**
+    // * .full-width removes X-padding making full-width container
+    //**
     &:not(.full-width) {
         padding-left: calc(#{$gutter-width} / 2);
         padding-right: calc(#{$gutter-width} / 2);
     }
 
-    /**
-    * .no-gutter removes gutter from container and immediate child columns, but not nested columns
-    **/
+    //**
+    // * .no-gutter removes gutter from container and immediate child columns, but not nested columns
+    //**
     &.no-gutter,
     &.no-gutter > [class*=col] {
         padding: 0;

@@ -1,19 +1,19 @@
-/**
- * Grid Configuration
-**/
+//**
+// * Grid Configuration
+//**/
 @import 'settings/settings';
 @import 'settings/reboot';
 
 
-/**
- * Grid mixins
-**/
+//**
+// * Grid mixins
+//**/
 @import 'mixins/respond-to';
 @import 'mixins/columns';
 
 
-/**
- * Grid components
-**/
+//**
+// * Grid components
+//**/
 @import 'components/grid';
 @import 'components/display';

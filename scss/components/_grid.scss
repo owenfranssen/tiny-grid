@@ -1,11 +1,11 @@
-/**
- * Column Classes
-**/
+//**
+// * Column Classes
+//**
 
-/**
- * .col default to full width mobile-first
- * .no-gutter removes gutter
-**/
+//**
+// * .col default to full width mobile-first
+// * .no-gutter removes gutter
+//**
 .col,
 .col-100,
 [class*=col] {
@@ -33,7 +33,6 @@
     }
 }
 
-//@media only screen and (min-width: #{$medium}) {
 @include respond-to('medium-up') {
     .col,
     [class*=col-lg] {
