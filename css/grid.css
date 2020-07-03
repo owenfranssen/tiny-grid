@@ -1,9 +1,52 @@
+/**
+  * Grid Configuration
+ **/
+/**
+ * Grid breakpoints
+**/
+/**
+ * Number of columns in grid
+**/
+/**
+ * Gutter width
+**/
+/**
+ * For consitent sizing, default box-sizinf to border box on
+ * all elements
+**/
 *,
 *::before,
 *::after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box; }
 
+/**
+  * Grid mixins
+ **/
+/**
+ * Mixins to generate media queries based on $breakpoints
+**/
+/**
+ * Mixins to generate grid classes
+**/
+/**
+ * col-1, .col-2, .col-3 ... .col-11, .col-12 where in
+ * .col-X X is X/12
+**/
+/**
+ * col-10, .col-20, ... .col-90, .col-100 where in col-X
+ * X is % of width
+**/
+/**
+ * Grid components
+ **/
+/*
+ * Column Classes
+*/
+/*
+ * .col default to full width mobile-first
+ * .no-gutter removes gutter
+*/
 .col,
 .col-100,
 [class*=col] {
@@ -370,6 +413,9 @@
     max-width: calc(100% - 1rem);
     width: calc(100% - 1rem); } }
 
+/*
+ * Classes to hide or show elements based on breakpoints
+*/
 .hide-sm,
 [class*=show--] {
   display: none !important; }
@@ -415,7 +461,13 @@ html, body {
   max-width: 100%;
   padding-bottom: calc(1rem / 2);
   padding-top: calc(1rem / 2);
-  width: 100%; }
+  width: 100%;
+  /**
+     * .full-width removes X-padding making full-width container
+    **/
+  /**
+     * .no-gutter removes gutter from container and immediate child columns, but not nested columns
+    **/ }
   .container:not(.full-width) {
     padding-left: calc(1rem / 2);
     padding-right: calc(1rem / 2); }

@@ -1,3 +1,24 @@
+$mobile: 576px !default;
+$tablet: 768px !default;
+$laptop: 992px !default;
+$desktop: 1200px !default;
+$widescreen: 1400px !default;
+$small: $mobile !default;
+$medium: $tablet !default;
+$large: $laptop !default;
+$extralarge: $desktop !default;
+$breakpoints: (
+  ('md', $medium),
+  ('lg', $large)
+) !default;
+$media-breakpoints: (
+    ('small', $small),
+    ('medium', $medium),
+    ('large', $large),
+    ('extralarge', $extralarge)
+) !default;
+$columns: 12 !default;
+$gutter-width: 1rem !default;
 *,
 *::before,
 *::after {

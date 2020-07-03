@@ -24,7 +24,7 @@ gulp.task('set-prod-env', function(cb) {
     cb();
 });
 
-gulp.task('grid-sass', function(cb) {
+gulp.task('scss', function(cb) {
     let stream = gulp.src('scss/**/*.scss')
     .pipe(sourcemaps.init())
     .pipe(sass({
@@ -43,7 +43,7 @@ gulp.task('grid-sass', function(cb) {
 });
 
 gulp.task('css-min', function() {
-    let stream = gulp.src('css/grid.css')
+    let stream = gulp.src(['css/*.css','!css/*.min.css'])
     .pipe(sass({
         outputStyle: "compressed",
         includePaths: ["node_modules"]
@@ -52,7 +52,9 @@ gulp.task('css-min', function() {
         autoprefixer(),
         cssnano()
     ]))
-    .pipe(rename('grid.min.css'))
+    .pipe(rename((path) => {
+        path.basename += '.min';
+    }))
     .pipe(gulp.dest('./css'));
 
     return stream;
@@ -64,18 +66,17 @@ gulp.task('grid-shopify', function() {
     .pipe(scsscombine())
     .pipe(scsscombine())
     .pipe(scsscombine())
-    //.pipe(replace(/\/[\*]{1,2}([\n\s\S]+?)[\*]{2}\//g, ''))
-    //.pipe(replace(/[\r\n]+/g, '\n'))
+    .pipe(scsscombine())
     .pipe(strip.text())
     .pipe(tidy())
     .pipe(concat('grid-shopify.scss.liquid'))
     .pipe(gulp.dest('shopify-src-scss'));
 });
 
-gulp.task('gen-css', gulp.series('grid-sass', 'css-min'));
+gulp.task('gen-css', gulp.series('scss', 'css-min', 'grid-shopify'));
 
-gulp.task('watch-grid', function() {
-    gulp.watch(`${src}/scss/grid/**/*.scss`, gulp.series('grid-sass', 'css-min'));
+gulp.task('watch', function() {
+    gulp.watch(`${src}/scss/grid/**/*.scss`, gulp.series('gen-css'));
 });
 
-gulp.task('default', gulp.series('watch-grid'));
+gulp.task('default', gulp.series('watch'));

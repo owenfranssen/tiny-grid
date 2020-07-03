@@ -1,6 +1,16 @@
-//**
-// * Shopify uses lists instead of maps
-//**
+/**
+ * Grid breakpoints
+**/
+$mobile: 576px !default;
+$tablet: 768px !default;
+$laptop: 992px !default;
+$desktop: 1200px !default;
+$widescreen: 1400px !default;
+
+$small: $mobile !default;
+$medium: $tablet !default;
+$large: $laptop !default;
+$extralarge: $desktop !default;
 
 $breakpoints: (
 //  ('xs', 0),
