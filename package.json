@@ -1,0 +1,22 @@
+{
+  "name": "css-grid",
+  "version": "0.0.1",
+  "devDependencies": {
+    "autoprefixer": "^9.8.4",
+    "cssnano": "^4.1.10",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-remove-empty-lines": "^0.1.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-scss-combine": "^1.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-strip-comments": "^2.5.2"
+  },
+  "scripts": {
+    "stylelint": "stylelint 'scss/**/*.scss' --syntax scss"
+  },
+  "dependencies": {}
+}

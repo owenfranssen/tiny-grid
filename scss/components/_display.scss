@@ -1,27 +1,29 @@
-//**
-// * Classes to hide or show elements based on breakpoints
-//**
+/*
+ * Classes to hide or show elements based on breakpoints
+*/
 
 .hide-sm,
 [class*=show--] {
     display: none !important;
 }
 
-@each $breakpoint, $width in $breakpoints {
+@each $breakpoint in $breakpoints {
+    $label: nth($breakpoint, 1);
+    $width: nth($breakpoint, 2);
     @media only screen and (min-width: #{$width}) {
-        .hide--#{$breakpoint} {
+        .hide--#{$label} {
             display: none !important;
         }
 
-        .show--#{$breakpoint} {
+        .show--#{$label} {
             display: block !important;
         }
 
-        .show--#{$breakpoint}-inline {
+        .show--#{$label}-inline {
             display: inline !important;
         }
 
-        .show--#{$breakpoint}-inline-block {
+        .show--#{$label}-inline-block {
             display: inline-block !important;
         }
     }

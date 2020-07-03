@@ -1,11 +1,11 @@
-//**
-// * Column Classes
-//**
+/*
+ * Column Classes
+*/
 
-//**
-// * .col default to full width mobile-first
-// * .no-gutter removes gutter
-//**
+/*
+ * .col default to full width mobile-first
+ * .no-gutter removes gutter
+*/
 .col,
 .col-100,
 [class*=col] {
@@ -42,17 +42,19 @@
     }
 }
 
-@each $breakpoint, $width in $breakpoints {
+@each $breakpoint in $breakpoints {
+    $label: nth($breakpoint, 1);
+    $width: nth($breakpoint, 2);
     @media only screen and (min-width: #{$width}) {
         @for $index from 1 through $columns {
-            .col-#{$breakpoint}-#{$index} {
+            .col-#{$label}-#{$index} {
                 @include make-col($index);
             }
         }
 
         @for $index from 2 through 10 {
             $label: $index * 10;
-            .col-#{$breakpoint}-#{$label} {
+            .col-#{$label}-#{$label} {
                 @include make-col-percent($index);
             }
         }

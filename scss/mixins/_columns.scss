@@ -1,11 +1,11 @@
-//**
-// * Mixins to generate grid classes
-//**
+/**
+ * Mixins to generate grid classes
+**/
 
-//**
-// * col-1, .col-2, .col-3 ... .col-11, .col-12 where in
-// * .col-X X is X/12
-//**
+/**
+ * col-1, .col-2, .col-3 ... .col-11, .col-12 where in
+ * .col-X X is X/12
+**/
 @mixin make-col($index) {
     $width: percentage(($index / $columns));
     $width-after-gutter: calc(#{$width} - #{$gutter-width});
@@ -14,10 +14,10 @@
     width: $width-after-gutter;
 }
 
-//**
-// * col-10, .col-20, ... .col-90, .col-100 where in col-X
-// * X is % of width
-//**
+/**
+ * col-10, .col-20, ... .col-90, .col-100 where in col-X
+ * X is % of width
+**/
 @mixin make-col-percent($index) {
     $width: percentage(($index / 10));
     $width-after-gutter: calc(#{$width} - #{$gutter-width});
