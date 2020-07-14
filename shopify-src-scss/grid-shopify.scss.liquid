@@ -46,12 +46,15 @@ $gutter-width: 1rem !default;
     max-width: $width-after-gutter;
     width: $width-after-gutter;
 }
-@mixin make-col-percent($index) {
-    $width: percentage(($index / 10));
+@mixin make-col-percent-fixed($percent) {
+    $width: percentage($percent);
     $width-after-gutter: calc(#{$width} - #{$gutter-width});
     flex-basis: $width-after-gutter;
     max-width: $width-after-gutter;
     width: $width-after-gutter;
+}
+@mixin make-col-percent($index) {
+    @include make-col-percent-fixed(($index / 10))
 }
 .col,
 .col-100,
@@ -75,6 +78,12 @@ $gutter-width: 1rem !default;
         @include make-col-percent($index);
     }
 }
+$percentages: 25, 33, 66, 75;
+@each $percent in $percentages {
+    .col-#{$percent} {
+        @include make-col-percent-fixed($percent/100);
+    }
+}
 @include respond-to('medium-up') {
     .col,
     [class*=col-lg] {
@@ -93,9 +102,14 @@ $gutter-width: 1rem !default;
             }
         }
         @for $index from 2 through 10 {
-            $label: $index * 10;
-            .col-#{$label}-#{$label} {
+            $percentlabel: $index * 10;
+            .col-#{$label}-#{$percentlabel} {
                 @include make-col-percent($index);
+            }
+        }
+        @each $percent in $percentages {
+            .col-#{$label}-#{$percent} {
+                @include make-col-percent-fixed($percent/100);
             }
         }
     }

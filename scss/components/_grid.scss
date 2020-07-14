@@ -33,6 +33,13 @@
     }
 }
 
+$percentages: 25, 33, 66, 75;
+@each $percent in $percentages {
+    .col-#{$percent} {
+        @include make-col-percent-fixed($percent/100);
+    }
+}
+
 @include respond-to('medium-up') {
     .col,
     [class*=col-lg] {
@@ -53,9 +60,15 @@
         }
 
         @for $index from 2 through 10 {
-            $label: $index * 10;
-            .col-#{$label}-#{$label} {
+            $percentlabel: $index * 10;
+            .col-#{$label}-#{$percentlabel} {
                 @include make-col-percent($index);
+            }
+        }
+
+        @each $percent in $percentages {
+            .col-#{$label}-#{$percent} {
+                @include make-col-percent-fixed($percent/100);
             }
         }
     }

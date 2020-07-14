@@ -15,13 +15,21 @@
 }
 
 /**
- * col-10, .col-20, ... .col-90, .col-100 where in col-X
+ * col-X where
  * X is % of width
 **/
-@mixin make-col-percent($index) {
-    $width: percentage(($index / 10));
+@mixin make-col-percent-fixed($percent) {
+    $width: percentage($percent);
     $width-after-gutter: calc(#{$width} - #{$gutter-width});
     flex-basis: $width-after-gutter;
     max-width: $width-after-gutter;
     width: $width-after-gutter;
+}
+
+/**
+ * col-10, .col-20, ... .col-90, .col-100 where in col-X
+ * X is % of width
+**/
+@mixin make-col-percent($index) {
+    @include make-col-percent-fixed(($index / 10))
 }
